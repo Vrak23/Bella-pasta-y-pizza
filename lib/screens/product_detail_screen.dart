@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../models/product_model.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_routes.dart';
 
@@ -14,9 +15,11 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final product = ModalRoute.of(context)?.settings.arguments as ProductModel?;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detalle y Personalización'),
+        title: Text(product != null ? product.name : 'Detalle y Personalización'),
       ),
       body: Center(
         child: Padding(
@@ -31,12 +34,24 @@ class ProductDetailScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                'Personalización de Producto',
+                product?.name ?? 'Personalización de Producto',
+                textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
+              if (product != null) ...[
+                const SizedBox(height: 6),
+                Text(
+                  product.formattedPrice,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ],
               const SizedBox(height: 8),
               Text(
-                'Aquí se seleccionan los ingredientes adicionales y se calcula el total.',
+                product?.description ??
+                    'Aquí se seleccionan los ingredientes adicionales y se calcula el total.',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
