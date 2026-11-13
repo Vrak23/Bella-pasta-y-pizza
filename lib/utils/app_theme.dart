@@ -147,7 +147,7 @@ class AppTheme {
       ),
 
       // Tarjetas (Cards estándar para productos y categorías)
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: AppColors.cardBackground,
         elevation: 2,
         shadowColor: Colors.black.withValues(alpha: 0.08),

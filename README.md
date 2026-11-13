@@ -22,6 +22,15 @@ Desarrollar una aplicación móvil interactiva para pedir y personalizar pizzas 
 | 5 | Integrante 5 | **5. Mi Carrito de Compras** | **Gestor de Estado Global (`Provider`):** `CartProvider` para agregar/quitar ítems, manejo de cantidades (+ / -) y cálculo final. | [`lib/screens/cart_screen.dart`](lib/screens/cart_screen.dart) |
 | 6 | Integrante 6 | **6. Confirmación de Pedido** | **Persistencia SQLite (`sqflite`):** `DatabaseHelper` para registrar la orden en la tabla local `pedidos` y visualización de éxito. | [`lib/screens/order_success_screen.dart`](lib/screens/order_success_screen.dart) |
 
+
+### Implementación del Integrante 2: Registro y Login
+
+La pantalla `lib/screens/login_screen.dart` permite alternar entre inicio de sesión y creación de cuenta. Incluye validación del nombre, formato del correo, longitud mínima de contraseña y coincidencia de confirmación; también permite mostrar u ocultar las contraseñas y utiliza el tema global y el avatar de perfil.
+
+El modelo `lib/models/user_model.dart` representa el perfil con nombre, correo y fecha de creación, además de métodos para convertirlo a mapa y obtener sus iniciales. La contraseña no forma parte del modelo.
+
+**Alcance de esta entrega:** el formulario y la navegación funcionan como demostración local y envían el `UserModel` a la ruta del menú. No hay autenticación real ni almacenamiento de cuentas; para producción habría que conectar un backend o proveedor de identidad.
+
 ---
 
 ## 📱 Flujo de las 6 Pantallas del Reto
@@ -40,9 +49,10 @@ Desarrollar una aplicación móvil interactiva para pedir y personalizar pizzas 
 lib/
 ├── main.dart                  # Punto de entrada de la app
 ├── models/                    # Modelos de datos (Product, User, CartItem, Order)
+│   └── user_model.dart        # Modelo de perfil del usuario
 ├── screens/                   # Las 6 pantallas del reto
 │   ├── splash_screen.dart     # Pantalla 1 (Completada)
-│   ├── login_screen.dart      # Pantalla 2
+│   ├── login_screen.dart      # Pantalla 2 (registro, login y validaciones)
 │   ├── menu_screen.dart       # Pantalla 3
 │   ├── product_detail_screen.dart # Pantalla 4
 │   ├── cart_screen.dart       # Pantalla 5
