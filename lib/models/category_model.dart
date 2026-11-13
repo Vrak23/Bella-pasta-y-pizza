@@ -65,3 +65,4 @@ class CategoryModel {
   @override
   int get hashCode => id.hashCode;
 }
+
