@@ -56,30 +56,7 @@ class ProductCard extends StatelessWidget {
                   height: 140,
                   width: double.infinity,
                   color: AppColors.primary.withValues(alpha: 0.04),
-                  child: product.imageUrl.isNotEmpty
-                      ? Image.network(
-                          product.imageUrl,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) =>
-                              _buildImageFallback(),
-                          loadingBuilder: (context, child, loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return Center(
-                              child: SizedBox(
-                                width: 28,
-                                height: 28,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2.5,
-                                  value: loadingProgress.expectedTotalBytes != null
-                                      ? loadingProgress.cumulativeBytesLoaded /
-                                          loadingProgress.expectedTotalBytes!
-                                      : null,
-                                ),
-                              ),
-                            );
-                          },
-                        )
-                      : _buildImageFallback(),
+                  child: _buildProductImage(),
                 ),
 
                 // Badge de Destacado / Popular
@@ -257,6 +234,41 @@ class ProductCard extends StatelessWidget {
     );
   }
 
+  Widget _buildProductImage() {
+    if (product.imageUrl.isEmpty) return _buildImageFallback();
+
+    if (product.imageUrl.startsWith('http://') ||
+        product.imageUrl.startsWith('https://')) {
+      return Image.network(
+        product.imageUrl,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) => _buildImageFallback(),
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return Center(
+            child: SizedBox(
+              width: 28,
+              height: 28,
+              child: CircularProgressIndicator(
+                strokeWidth: 2.5,
+                value: loadingProgress.expectedTotalBytes != null
+                    ? loadingProgress.cumulativeBytesLoaded /
+                        loadingProgress.expectedTotalBytes!
+                    : null,
+              ),
+            ),
+          );
+        },
+      );
+    }
+
+    return Image.asset(
+      product.imageUrl,
+      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) => _buildImageFallback(),
+    );
+  }
+
   Widget _buildImageFallback() {
     return Center(
       child: Column(
@@ -281,3 +293,4 @@ class ProductCard extends StatelessWidget {
     );
   }
 }
+
