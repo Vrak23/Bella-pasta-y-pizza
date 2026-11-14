@@ -363,9 +363,9 @@ class _SplashScreenState extends State<SplashScreen>
 
                           const SizedBox(height: 8),
 
-                          // Pie de página institucional SENATI
+                          // Pie de página institucional
                           Text(
-                            'SENATI • Escuela de Tecnologías de la Información',
+                            'Bella Pasta & Pizza • Tradición Italiana',
                             style: GoogleFonts.poppins(
                               fontSize: 11,
                               color: AppColors.textMuted,

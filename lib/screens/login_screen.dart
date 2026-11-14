@@ -343,7 +343,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 18),
                   Text(
-                    'Bella Pasta & Pizza · SENATI',
+                    'Bella Pasta & Pizza · Tradición Italiana',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: AppColors.textMuted,
                           fontWeight: FontWeight.w500,

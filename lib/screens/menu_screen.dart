@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -144,43 +145,6 @@ class _MenuScreenState extends State<MenuScreen> {
                   color: AppColors.textSecondary,
                 ),
               ),
-              const SizedBox(height: 16),
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: AppColors.background,
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: AppColors.border),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.school_rounded, color: AppColors.primary),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'SENATI - Aplicaciones Móviles',
-                            style: GoogleFonts.poppins(
-                              fontSize: 12.5,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.textPrimary,
-                            ),
-                          ),
-                          Text(
-                            'Integrante 3: Menú de Categorías',
-                            style: GoogleFonts.poppins(
-                              fontSize: 11.5,
-                              color: AppColors.textSecondary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               const SizedBox(height: 20),
               SizedBox(
                 width: double.infinity,
@@ -190,6 +154,68 @@ class _MenuScreenState extends State<MenuScreen> {
                   onPressed: () {
                     Navigator.pop(ctx);
                     Navigator.pushNamed(context, AppRoutes.orderHistory);
+                  },
+                ),
+              ),
+              const SizedBox(height: 10),
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  icon: const Icon(
+                    Icons.android_rounded,
+                    color: AppColors.secondary,
+                  ),
+                  label: const Text(
+                    'Descargar APK (Android)',
+                    style: TextStyle(
+                      color: AppColors.secondary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: AppColors.secondary, width: 1.5),
+                  ),
+                  onPressed: () {
+                    const apkUrl =
+                        'https://github.com/Vrak23/Bella-pasta-y-pizza/releases/latest/download/bella-pasta-pizza.apk';
+                    Navigator.pop(ctx);
+                    showDialog(
+                      context: context,
+                      builder: (dCtx) => AlertDialog(
+                        title: const Row(
+                          children: [
+                            Icon(Icons.android_rounded, color: AppColors.secondary),
+                            SizedBox(width: 8),
+                            Text('Descargar APK'),
+                          ],
+                        ),
+                        content: const Text(
+                          'Descarga el instalador oficial para Android directamente desde GitHub Releases:\n\n$apkUrl',
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(dCtx),
+                            child: const Text('Cerrar'),
+                          ),
+                          ElevatedButton.icon(
+                            icon: const Icon(Icons.copy_rounded, size: 18),
+                            label: const Text('Copiar enlace'),
+                            onPressed: () {
+                              Clipboard.setData(const ClipboardData(text: apkUrl));
+                              Navigator.pop(dCtx);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  backgroundColor: AppColors.secondary,
+                                  content: Text(
+                                    'Enlace de descarga APK copiado al portapapeles.',
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    );
                   },
                 ),
               ),

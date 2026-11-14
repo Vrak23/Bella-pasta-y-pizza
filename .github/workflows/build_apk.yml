@@ -1,0 +1,64 @@
+name: Build Android APK
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-apk:
+    name: Compilar APK de Bella Pasta & Pizza
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Configurar Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Instalar dependencias
+        run: flutter pub get
+
+      - name: Ejecutar pruebas unitarias
+        run: flutter test
+
+      - name: Compilar APK Release
+        run: flutter build apk --release
+
+      - name: Preparar archivo APK
+        run: |
+          cp build/app/outputs/flutter-apk/app-release.apk bella-pasta-pizza.apk
+
+      - name: Subir APK como Artifact de GitHub Actions
+        uses: actions/upload-artifact@v4
+        with:
+          name: bella-pasta-pizza-apk
+          path: bella-pasta-pizza.apk
+
+      - name: Publicar APK en GitHub Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest-apk
+          name: "🍕 Bella Pasta & Pizza - APK Android"
+          body: |
+            Compilación automática oficial de la aplicación móvil **Bella Pasta & Pizza**.
+            - **Archivo:** `bella-pasta-pizza.apk`
+            - **Incluye:** 6 pantallas completas, catálogo con imágenes locales, personalización, carrito con Provider y persistencia local SQLite (`sqflite`).
+          files: bella-pasta-pizza.apk
+          overwrite: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
