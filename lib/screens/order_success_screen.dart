@@ -162,23 +162,16 @@ class OrderSuccessScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(16),
                       ),
                     ),
-                    icon: const Icon(Icons.share_outlined, color: AppColors.primary),
+                    icon: const Icon(Icons.history_rounded, color: AppColors.primary),
                     label: Text(
-                      'Compartir Ticket',
+                      'Ver Historial',
                       style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w600,
                         color: AppColors.primary,
                       ),
                     ),
                     onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          backgroundColor: AppColors.secondary,
-                          behavior: SnackBarBehavior.floating,
-                          content: Text(
-                              '¡Comprobante guardado en tu dispositivo! (Simulación)'),
-                        ),
-                      );
+                      Navigator.pushNamed(context, AppRoutes.orderHistory);
                     },
                   ),
                 ),

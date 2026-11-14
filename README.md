@@ -15,12 +15,12 @@ Desarrollar una aplicación móvil interactiva para pedir y personalizar pizzas 
 
 | # | Integrante | Pantalla Asignada | Responsabilidad Técnica Transversal | Archivo Principal |
 |---|:---|:---|:---|:---|
-| 1 | **Tú (Completado)** | **1. Splash / Bienvenida** | **Estilos Globales, Tema y Assets:** Paleta de colores italiana, `AppTheme`, tipografías Google Fonts, logotipo responsive y rutas centrales. | [`lib/screens/splash_screen.dart`](lib/screens/splash_screen.dart) |
-| 2 | Integrante 2 | **2. Registro y Login** | **Modelos y Formularios:** Validación de campos (Email, Password), controladores de texto y modelo `UserModel`. | [`lib/screens/login_screen.dart`](lib/screens/login_screen.dart) |
-| 3 | **Integrante 3 (Completado - Andre)** | **3. Menú de Categorías** | **Estructura y Widgets:** Cards de productos (`ProductCard`), filtros (`CategoryChip`), modelos (`ProductModel`, `CategoryModel`), buscador y barra de navegación inferior con precios en Soles (S/.). | [`lib/screens/menu_screen.dart`](lib/screens/menu_screen.dart) |
-| 4 | Integrante 4 | **4. Detalle y Personalización** | **Estado Dinámico (`setState`):** Selector de tamaño, checkboxes para ingredientes extra y cálculo reactivo de subtotal y total. | [`lib/screens/product_detail_screen.dart`](lib/screens/product_detail_screen.dart) |
-| 5 | Integrante 5 | **5. Mi Carrito de Compras** | **Gestor de Estado Global (`Provider`):** `CartProvider` para agregar/quitar ítems, manejo de cantidades (+ / -) y cálculo final. | [`lib/screens/cart_screen.dart`](lib/screens/cart_screen.dart) |
-| 6 | Integrante 6 | **6. Confirmación de Pedido** | **Persistencia SQLite (`sqflite`):** `DatabaseHelper` para registrar la orden en la tabla local `pedidos` y visualización de éxito. | [`lib/screens/order_success_screen.dart`](lib/screens/order_success_screen.dart) |
+| 1 | **Rodrigo Llanos (Completado)** | **1. Splash / Bienvenida** | **Estilos Globales, Tema y Assets:** Paleta de colores italiana, `AppTheme`, tipografías Google Fonts, logotipo responsive y rutas centrales. | [`lib/screens/splash_screen.dart`](lib/screens/splash_screen.dart) |
+| 2 | **Jerald (Completado)** | **2. Registro y Login** | **Modelos y Formularios:** Validación de campos (Email, Password), controladores de texto y modelo `UserModel`. | [`lib/screens/login_screen.dart`](lib/screens/login_screen.dart) |
+| 3 | **Andre Zapata (Completado)** | **3. Menú de Categorías** | **Estructura y Widgets:** Cards de productos (`ProductCard`), filtros (`CategoryChip`), modelos (`ProductModel`, `CategoryModel`), buscador y barra de navegación inferior con precios en Soles (S/.). | [`lib/screens/menu_screen.dart`](lib/screens/menu_screen.dart) |
+| 4 | **James (Completado)** | **4. Detalle y Personalización** | **Estado Dinámico (`setState`):** Selector de tamaño, checkboxes para ingredientes extra y cálculo reactivo de subtotal y total. | [`lib/screens/product_detail_screen.dart`](lib/screens/product_detail_screen.dart) |
+| 5 | **James (Completado)** | **5. Mi Carrito de Compras** | **Gestor de Estado Global (`Provider`):** `CartProvider` para agregar/quitar ítems, manejo de cantidades (+ / -) y cálculo final. | [`lib/screens/cart_screen.dart`](lib/screens/cart_screen.dart) |
+| 6 | **Completado** | **6. Confirmación y SQLite** | **Persistencia SQLite (`sqflite`):** `DatabaseHelper` (`lib/services/database_helper.dart`) para registrar la orden en la tabla local `pedido_pizza` e historial persistente (`OrderHistoryScreen`). | [`lib/screens/order_success_screen.dart`](lib/screens/order_success_screen.dart) |
 
 
 ### Implementación del Integrante 3: Menú de Categorías (Rama `Andre`)

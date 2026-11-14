@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../models/cart_item_model.dart';
 import '../services/cart_provider.dart';
+import '../services/database_helper.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_routes.dart';
 
@@ -72,7 +73,7 @@ class _CartScreenState extends State<CartScreen> {
     }
   }
 
-  void _confirmOrder(CartProvider cart) {
+  Future<void> _confirmOrder(CartProvider cart) async {
     if (cart.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -102,6 +103,14 @@ class _CartScreenState extends State<CartScreen> {
       orderNotes: _notesController.text.trim(),
     );
 
+    // Persistencia local en SQLite (tabla pedido_pizza)
+    try {
+      await DatabaseHelper.instance.insertOrder(order);
+    } catch (e) {
+      debugPrint('Error al guardar pedido en SQLite: $e');
+    }
+
+    if (!mounted) return;
     Navigator.pushReplacementNamed(
       context,
       AppRoutes.orderSuccess,

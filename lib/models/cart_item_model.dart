@@ -56,4 +56,41 @@ class CartItemModel {
       quantity: quantity ?? this.quantity,
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'product': product.toMap(),
+      'size': size,
+      'size_extra_price': sizeExtraPrice,
+      'extras': extras,
+      'extras_price': extrasPrice,
+      'notes': notes,
+      'quantity': quantity,
+    };
+  }
+
+  factory CartItemModel.fromMap(Map<String, dynamic> map) {
+    final rawProduct = map['product'];
+    final product = rawProduct is Map<String, dynamic>
+        ? ProductModel.fromMap(rawProduct)
+        : ProductModel.sampleProducts.first;
+
+    final rawExtras = map['extras'];
+    final parsedExtras = rawExtras is List
+        ? rawExtras.map((e) => e.toString()).toList()
+        : <String>[];
+
+    return CartItemModel(
+      id: map['id'] as String? ?? '',
+      product: product,
+      size: map['size'] as String? ?? 'Personal',
+      sizeExtraPrice: (map['size_extra_price'] as num?)?.toDouble() ?? 0.0,
+      extras: parsedExtras,
+      extrasPrice: (map['extras_price'] as num?)?.toDouble() ?? 0.0,
+      notes: map['notes'] as String? ?? '',
+      quantity: (map['quantity'] as num?)?.toInt() ?? 1,
+    );
+  }
 }
+

@@ -184,6 +184,18 @@ class _MenuScreenState extends State<MenuScreen> {
               const SizedBox(height: 20),
               SizedBox(
                 width: double.infinity,
+                child: OutlinedButton.icon(
+                  icon: const Icon(Icons.receipt_long_rounded),
+                  label: const Text('Mis Pedidos (SQLite)'),
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                    Navigator.pushNamed(context, AppRoutes.orderHistory);
+                  },
+                ),
+              ),
+              const SizedBox(height: 10),
+              SizedBox(
+                width: double.infinity,
                 child: ElevatedButton.icon(
                   icon: const Icon(Icons.logout_rounded),
                   label: const Text('Cerrar Sesión'),
@@ -221,6 +233,12 @@ class _MenuScreenState extends State<MenuScreen> {
           ),
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.receipt_long_outlined),
+            tooltip: 'Historial de Pedidos (SQLite)',
+            onPressed: () =>
+                Navigator.pushNamed(context, AppRoutes.orderHistory),
+          ),
           Consumer<CartProvider>(
             builder: (context, cart, _) => Badge(
               isLabelVisible: cart.itemCount > 0,
