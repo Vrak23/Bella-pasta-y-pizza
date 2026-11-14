@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../models/category_model.dart';
 import '../models/product_model.dart';
 import '../models/user_model.dart';
+import '../services/cart_provider.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_routes.dart';
 import '../widgets/category_chip.dart';
@@ -219,10 +221,16 @@ class _MenuScreenState extends State<MenuScreen> {
           ),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.shopping_cart_outlined),
-            tooltip: 'Ver Carrito',
-            onPressed: () => Navigator.pushNamed(context, AppRoutes.cart),
+          Consumer<CartProvider>(
+            builder: (context, cart, _) => Badge(
+              isLabelVisible: cart.itemCount > 0,
+              label: Text('${cart.itemCount}'),
+              child: IconButton(
+                icon: const Icon(Icons.shopping_cart_outlined),
+                tooltip: 'Ver Carrito',
+                onPressed: () => Navigator.pushNamed(context, AppRoutes.cart),
+              ),
+            ),
           ),
         ],
       ),
@@ -492,43 +500,56 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentNavIndex,
-        onTap: _onNavigationTapped,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        selectedItemColor: AppColors.primary,
-        unselectedItemColor: AppColors.textMuted,
-        selectedLabelStyle: GoogleFonts.poppins(
-          fontSize: 12,
-          fontWeight: FontWeight.w600,
-        ),
-        unselectedLabelStyle: GoogleFonts.poppins(
-          fontSize: 11,
-          fontWeight: FontWeight.w500,
-        ),
-        elevation: 10,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.restaurant_menu_rounded),
-            activeIcon: Icon(Icons.restaurant_menu_rounded),
-            label: 'Menú',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.tune_rounded),
-            label: 'Personalizar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            activeIcon: Icon(Icons.shopping_cart_rounded),
-            label: 'Carrito',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline_rounded),
-            activeIcon: Icon(Icons.person_rounded),
-            label: 'Mi Perfil',
-          ),
-        ],
+      bottomNavigationBar: Builder(
+        builder: (context) {
+          final cartCount = context.watch<CartProvider>().itemCount;
+          return BottomNavigationBar(
+            currentIndex: _currentNavIndex,
+            onTap: _onNavigationTapped,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.white,
+            selectedItemColor: AppColors.primary,
+            unselectedItemColor: AppColors.textMuted,
+            selectedLabelStyle: GoogleFonts.poppins(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
+            unselectedLabelStyle: GoogleFonts.poppins(
+              fontSize: 11,
+              fontWeight: FontWeight.w500,
+            ),
+            elevation: 10,
+            items: [
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.restaurant_menu_rounded),
+                activeIcon: Icon(Icons.restaurant_menu_rounded),
+                label: 'Menú',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.tune_rounded),
+                label: 'Personalizar',
+              ),
+              BottomNavigationBarItem(
+                icon: Badge(
+                  isLabelVisible: cartCount > 0,
+                  label: Text('$cartCount'),
+                  child: const Icon(Icons.shopping_cart_outlined),
+                ),
+                activeIcon: Badge(
+                  isLabelVisible: cartCount > 0,
+                  label: Text('$cartCount'),
+                  child: const Icon(Icons.shopping_cart_rounded),
+                ),
+                label: 'Carrito',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.person_outline_rounded),
+                activeIcon: Icon(Icons.person_rounded),
+                label: 'Mi Perfil',
+              ),
+            ],
+          );
+        },
       ),
     );
   }
