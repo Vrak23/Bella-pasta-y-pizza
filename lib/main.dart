@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'services/cart_provider.dart';
 import 'utils/app_routes.dart';
 import 'utils/app_theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const BellaPastaPizzaApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CartProvider()),
+      ],
+      child: const BellaPastaPizzaApp(),
+    ),
+  );
 }
 
 class BellaPastaPizzaApp extends StatelessWidget {
