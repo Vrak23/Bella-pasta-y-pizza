@@ -196,6 +196,65 @@ class _MenuScreenState extends State<MenuScreen> {
               const SizedBox(height: 10),
               SizedBox(
                 width: double.infinity,
+                child: OutlinedButton.icon(
+                  icon: const Icon(
+                    Icons.android_rounded,
+                    color: AppColors.secondary,
+                  ),
+                  label: const Text(
+                    'Descargar APK (Android)',
+                    style: TextStyle(color: AppColors.secondary),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: AppColors.secondary, width: 1.5),
+                  ),
+                  onPressed: () {
+                    const apkUrl =
+                        'https://github.com/Vrak23/Bella-pasta-y-pizza/releases/latest/download/bella-pasta-pizza.apk';
+                    Navigator.pop(ctx);
+                    showDialog(
+                      context: context,
+                      builder: (dCtx) => AlertDialog(
+                        title: const Row(
+                          children: [
+                            Icon(Icons.android_rounded, color: AppColors.secondary),
+                            SizedBox(width: 8),
+                            Text('Descargar APK'),
+                          ],
+                        ),
+                        content: const Text(
+                          'Descarga el instalador oficial para Android directamente desde GitHub Releases:\n\n$apkUrl',
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(dCtx),
+                            child: const Text('Cerrar'),
+                          ),
+                          ElevatedButton.icon(
+                            icon: const Icon(Icons.copy_rounded, size: 18),
+                            label: const Text('Copiar enlace'),
+                            onPressed: () {
+                              Clipboard.setData(const ClipboardData(text: apkUrl));
+                              Navigator.pop(dCtx);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  backgroundColor: AppColors.secondary,
+                                  content: Text(
+                                    'Enlace de descarga APK copiado al portapapeles.',
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 10),
+              SizedBox(
+                width: double.infinity,
                 child: ElevatedButton.icon(
                   icon: const Icon(Icons.logout_rounded),
                   label: const Text('Cerrar Sesión'),

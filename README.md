@@ -2,6 +2,18 @@
 > **Escuela de Tecnologías de la Información • Aplicaciones Móviles**  
 > Proyecto integrador desarrollado en **Flutter** para pedidos y personalización de gastronomía italiana tradicional.
 
+<p align="center">
+  <a href="https://github.com/Vrak23/Bella-pasta-y-pizza/releases/latest/download/bella-pasta-pizza.apk">
+    <img src="https://img.shields.io/badge/DESCARGAR_APK-Android_Release-C62828?style=for-the-badge&logo=android&logoColor=white" alt="Descargar APK" />
+  </a>
+  &nbsp;
+  <a href="https://github.com/Vrak23/Bella-pasta-y-pizza/actions/workflows/build_apk.yml">
+    <img src="https://img.shields.io/github/actions/workflow/status/Vrak23/Bella-pasta-y-pizza/build_apk.yml?style=for-the-badge&label=Build%20APK" alt="Estado del Build" />
+  </a>
+</p>
+
+> 📱 **Instalación directa en Android:** Haz clic en el botón rojo **DESCARGAR APK** para bajar `bella-pasta-pizza.apk` directamente a tu celular (si Android lo solicita, habilita *"Instalar aplicaciones de origen desconocido"*).
+
 ---
 
 ## 🎯 Objetivo del Proyecto
